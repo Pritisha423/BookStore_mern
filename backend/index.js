@@ -63,6 +63,20 @@ app.get('/books', async (request,response) => {
     }
 });
 
+// Route for the Get All Books from database by id
+app.get('/books/:id', async (request,response) => {
+    try {
+        const {id} = request.params;
+
+        const book = await Book.findById(id);
+
+        return response.status(200).json({book});
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({message: error.message});
+    }
+});
+
 mongoose.connect("mongodb://localhost:27017/BookStore")
         .then(() => {
             console.log('App connected to database');
@@ -71,7 +85,7 @@ mongoose.connect("mongodb://localhost:27017/BookStore")
                // Inside the callback function: 
                 // It includes the value of the `PORT` variable in the log message to inform you of the port number being used.
                 console.log(`App is listening to port: ${PORT}`);
-            }); 
+             }); 
         })
         .catch((error) =>{
             console.log(error);
