@@ -2,6 +2,7 @@ import express, { response } from "express";
 import {PORT} from "./config.js";
 import mongoose from "mongoose"; 
 import booksRoutes from "./routes/booksRoutes.js";
+import cors from 'cors';
 const app = express(); 
 
 // Middleware for parsing JSON request bodies
