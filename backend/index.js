@@ -4,6 +4,21 @@ import mongoose from "mongoose";
 import booksRoutes from "./routes/booksRoutes.js";
 const app = express(); 
 
+// Middleware for parsing JSON request bodies
+app.use(express.json());
+
+// Middleware for handling CORS POlICY
+// Option 1: Allow all Origines with Default of cors(*)
+app.use(cors());
+// Option 2: Allow custom Origins
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        method: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type'],
+    })
+)
+ 
 // Define a route handler for a GET request at the root URL ("/")
 app.get('/', (request, response) => {
     // Log the incoming request details
@@ -13,9 +28,6 @@ app.get('/', (request, response) => {
     // and send a "Welcome" message to the client
     return response.status(234).send('Welcome to MERN Stack Tutorial');
 });
-
-// Middleware for parsing JSON request bodies
-app.use(express.json());
 
 // Middleware for books router.
 app.use('/books',booksRoutes);
