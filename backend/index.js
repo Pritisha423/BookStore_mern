@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import {PORT} from "./config.js";
 import mongoose from "mongoose"; 
 import booksRoutes from "./routes/booksRoutes.js";
@@ -15,7 +15,7 @@ app.use(cors());
 // app.use(
 //     cors({
 //         origin: 'http://localhost:3000',
-//         method: ['GET', 'POST', 'PUT', 'DELETE'],
+//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //         allowedHeaders: ['Content-Type'],
 //     })
 // );
@@ -45,6 +45,6 @@ mongoose.connect("mongodb://localhost:27017/BookStore")
         })
         .catch((error) =>{
             console.log(error);
-        })
+        });
 
 
